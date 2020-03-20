@@ -89,7 +89,8 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     [theme.breakpoints.down("sm")]: {
-      marginLeft: "auto"
+      marginLeft: "auto",
+      marginRight: "auto !important"
     }
   }
 }));
