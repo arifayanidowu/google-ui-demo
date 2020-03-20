@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import { Typography } from "@material-ui/core";
+
 import useAutocomplete from "@material-ui/lab/useAutocomplete";
 
 const useStyles = makeStyles(theme => ({
@@ -78,7 +78,7 @@ export default function SearchInput() {
   const classes = useStyles();
   const {
     getRootProps,
-    getInputLabelProps,
+
     getInputProps,
     getListboxProps,
     getOptionProps,
@@ -111,6 +111,7 @@ export default function SearchInput() {
           type="submit"
           className={classes.iconButton}
           aria-label="directions"
+          style={{ backgroundColor: "transparent" }}
         >
           <span className={classes.speaker}></span>
         </IconButton>

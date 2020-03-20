@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import theme from "./theme";
 import { HomeComponent } from "./components/HomeComponent";
+import { Results } from "./components/Results";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={HomeComponent} />
+            <Route path="/results" component={Results} />
           </Switch>
         </Router>
       </MuiThemeProvider>

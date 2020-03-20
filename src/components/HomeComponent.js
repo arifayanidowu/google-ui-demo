@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Typography, Button } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import AppsIcon from "@material-ui/icons/Apps";
