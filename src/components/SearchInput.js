@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 
 import useAutocomplete from "@material-ui/lab/useAutocomplete";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,6 +51,10 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: "middle"
   },
   listbox: {
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      minWidth: 200
+    },
     width: 600,
     margin: 0,
     padding: 0,
@@ -76,6 +81,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchInput() {
   const classes = useStyles();
+  const history = useHistory();
   const {
     getRootProps,
 
@@ -88,6 +94,20 @@ export default function SearchInput() {
     options: top100Films,
     getOptionLabel: option => option.title
   });
+
+  React.useEffect(() => {
+    const abortController = new AbortController();
+    if (getInputProps().value.length > 1) {
+      console.log(getInputProps().value);
+      setTimeout(() => {
+        history.push(`/search/${getInputProps().value}`);
+      }, 1000);
+    }
+
+    return () => {
+      abortController.abort();
+    };
+  }, [history, getInputProps]);
 
   return (
     <>
@@ -108,7 +128,6 @@ export default function SearchInput() {
 
         <IconButton
           color="primary"
-          type="submit"
           className={classes.iconButton}
           aria-label="directions"
           style={{ backgroundColor: "transparent" }}

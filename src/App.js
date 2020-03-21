@@ -15,7 +15,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={HomeComponent} />
-            <Route path="/results" component={Results} />
+            <Route path="/search/:text" component={Results} />
           </Switch>
         </Router>
       </MuiThemeProvider>

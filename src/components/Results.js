@@ -6,12 +6,18 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import AppsIcon from "@material-ui/icons/Apps";
 import Avatar from "@material-ui/core/Avatar";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: "white",
-    height: "100vh"
+    minHeight: "100vh",
+    height: "100%"
   },
   search: {
     padding: "2px 4px",
@@ -88,15 +94,41 @@ const useStyles = makeStyles(theme => ({
     marginTop: 10
   },
   logo: {
+    cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
       marginLeft: "auto",
-      marginRight: "auto !important"
+      marginRight: "auto !important",
+      marginBottom: 20
+    }
+  },
+  social: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
+  },
+  card: {
+    maxWidth: 345,
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
+  },
+  media: {
+    height: 140,
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
+  },
+  linkHover: {
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline"
     }
   }
 }));
 
-export const Results = () => {
+export const Results = props => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -116,23 +148,24 @@ export const Results = () => {
                 alt="Google Img"
                 style={{ marginRight: 50 }}
                 className={classes.logo}
+                onClick={() => history.push("/")}
               />
               <Paper component="form" className={classes.search} elevation={0}>
-                {/* <IconButton
+                <IconButton
                   disabled
                   className={classes.iconButton}
                   aria-label="menu"
                 >
                   <SearchIcon />
-                </IconButton> */}
+                </IconButton>
                 <InputBase
                   className={classes.input}
                   inputProps={{ "aria-label": "search google" }}
+                  value={props.match.params.text}
                 />
 
                 <IconButton
                   color="primary"
-                  type="submit"
                   className={classes.iconButton}
                   aria-label="directions"
                   style={{ backgroundColor: "transparent" }}
@@ -149,7 +182,7 @@ export const Results = () => {
               </Paper>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={2}>
+          <Grid item xs={12} md={2} className={classes.social}>
             <Grid container justify="center" alignItems="center">
               <IconButton className={classes.iconButton}>
                 <AppsIcon />
@@ -358,9 +391,125 @@ export const Results = () => {
         </nav>
       </header>
       <div className={classes.innerContainer}>
-        <Typography className={classes.results}>
+        <Typography className={classes.results} gutterBottom>
           About 1,000 results (0.34 seconds)
         </Typography>
+
+        <div>
+          <Typography variant="h6" style={{ marginTop: 15, marginBottom: 15 }}>
+            Top Stories
+          </Typography>
+          <Grid container justify="center" alignItems="center" spacing={3}>
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image="/img/placeholder.png"
+                    title="Placeholder"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      <Link to="#">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Officiis, quis.
+                      </Link>
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      style={{ marginTop: 20, color: "#333" }}
+                      gutterBottom
+                    >
+                      BBC News
+                    </Typography>
+                    <Typography
+                      style={{ marginTop: 20, color: "#333", fontSize: 13 }}
+                      gutterBottom
+                    >
+                      1 hour ago
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card className={classes.card}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image="/img/placeholder.png"
+                    title="Placeholder"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      <Link to="#">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing
+                        elit. Consectetur, dicta.
+                      </Link>
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      style={{ marginTop: 20, color: "#333" }}
+                      gutterBottom
+                    >
+                      BBC News
+                    </Typography>
+                    <Typography
+                      style={{ marginTop: 20, color: "#333", fontSize: 13 }}
+                      gutterBottom
+                    >
+                      1 hour ago
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+            <Grid item xs={12} md={4}></Grid>
+          </Grid>
+          <Typography>
+            <Link
+              to="#"
+              style={{ display: "flex", marginTop: 10 }}
+              className={classes.linkHover}
+            >
+              <ArrowForwardIcon />
+              More for {props.match.params.text} news
+            </Link>
+          </Typography>
+          <div style={{ marginTop: 20 }}>
+            <div style={{ cursor: "pointer" }}>
+              <Typography className={classes.results}>
+                www.bbc.co.uk > news > topics > Nigeria
+              </Typography>
+              <Typography variant="h6">
+                <Link to="#" className={classes.linkHover}>
+                  {" "}
+                  {props.match.params.text} - BBC News
+                </Link>
+              </Typography>
+            </div>
+            <Typography
+              style={{
+                wordWrap: "break-word",
+                fontSize: 14,
+                color: "#3C4043",
+                lineHeight: "1.57"
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis
+              praesentium est provident velit,
+              <br /> a corrupti quo minima aspernatur facere at!...
+            </Typography>
+          </div>
+        </div>
       </div>
     </div>
   );
